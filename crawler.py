@@ -89,13 +89,12 @@ def collect_page_links() -> None:
     time.sleep(throttle_secs)
 
 
-links = ["?dir=2017/02"]
-
 # ----------------------------------------------------------
 #  === PROGRAM STARTS HERE ================================
 # ----------------------------------------------------------
-db.setup_db()
 
+db.setup_db()
+links = ["?dir=2017/02"]
 print('- CRAWLING PROCESS -')
 while links:
     collect_page_links()

@@ -16,5 +16,5 @@ class LotteryResults:
     lottery_number: str
     district: str
     shift: str
-    numbers: list
+    numbers: dict
     losers: str = -1
