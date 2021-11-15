@@ -21,5 +21,5 @@ def parse_config() -> Config:
         date_query_param=env['QUERY_PARAM'],
         tracking_enabled=True if env['TRACK_PROCESSED'].lower() == 'true' else False,
         throttle_secs=1,
-        downloads_dir=env['DOWN'],
+        downloads_dir=env['DOWNLOADS_DIR'],
     )

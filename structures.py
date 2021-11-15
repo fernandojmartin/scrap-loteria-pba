@@ -28,5 +28,12 @@ quiniela_multiple_data_matrix = [
         district=90,
         shift=91,
         numbers=slice(94, 114)
+    ),
+    DataPositions(
+        date=0,
+        lottery_number=114,
+        district=116,
+        shift=117,
+        numbers=slice(120, 140)
     )
 ]
