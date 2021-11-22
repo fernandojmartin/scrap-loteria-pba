@@ -5,7 +5,7 @@ import database as db
 
 from bs4 import BeautifulSoup
 from loguru import logger
-from modules.config import parse_config
+from modules.config import load_config
 
 
 def should_url_be_stored(url_path: str) -> bool:
@@ -63,11 +63,11 @@ def collect_page_links(links: list) -> None:
     page_path = links.pop(0)
 
     logger.debug(f'Processing link: {page_path}')
-    if parse_config().tracking_enabled and db.has_been_crawled(page_path):
+    if load_config().tracking_enabled and db.has_been_crawled(page_path):
         logger.debug('Already crawled - Skipping')
         return
 
-    full_url = f'{parse_config().search_url}{page_path}'
+    full_url = f'{load_config().search_url}{page_path}'
     logger.debug(f'Crawling {full_url}')
 
     page = requests.get(full_url)
@@ -80,10 +80,10 @@ def collect_page_links(links: list) -> None:
 
     parse_page_contents(content, links)
 
-    if parse_config().tracking_enabled and should_url_be_stored(page_path):
+    if load_config().tracking_enabled and should_url_be_stored(page_path):
         db.save_has_been_crawled(page_path)
 
-    time.sleep(parse_config().throttle_secs)
+    time.sleep(load_config().throttle_secs)
 
 
 def execute_crawling_process(links: list):

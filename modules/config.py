@@ -12,7 +12,7 @@ class Config:
     downloads_dir: str
 
 
-def parse_config() -> Config:
+def load_config() -> Config:
     env = dotenv_values('.env')
 
     return Config(

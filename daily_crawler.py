@@ -4,7 +4,7 @@ import re
 import database as db
 from loguru import logger
 
-from modules.config import parse_config
+from modules.config import load_config
 import modules.scraping as scraping
 import modules.downloading as downloading
 
@@ -29,7 +29,7 @@ def get_date_arg() -> str:
 #  === PROGRAM STARTS HERE ================================
 # ----------------------------------------------------------
 
-links = [f'{parse_config().date_query_param}{get_date_arg()}']
+links = [f'{load_config().date_query_param}{get_date_arg()}']
 db.setup_db()
 start = time.perf_counter()
 scraping.execute_crawling_process(links)

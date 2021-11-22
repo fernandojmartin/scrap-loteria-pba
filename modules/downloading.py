@@ -5,7 +5,7 @@ import database as db
 
 from loguru import logger
 from concurrent import futures
-from modules.config import parse_config
+from modules.config import load_config
 
 
 def get_download_file_path(file_uri: str) -> str:
@@ -18,8 +18,8 @@ def get_download_file_path(file_uri: str) -> str:
     Returns:
         str: the path to downloads dir + local unique file name
     """
-    local_name = file_uri.replace(parse_config().files_url, '')
-    download_dir = parse_config().downloads_dir
+    local_name = file_uri.replace(load_config().files_url, '')
+    download_dir = load_config().downloads_dir
     full_path = f'{download_dir}/{local_name}'
     save_dir = '/'.join(full_path.split('/')[:-1])
 
@@ -60,13 +60,13 @@ def download(file: str) -> str:
     Returns:
         (str) The path of the downloaded file or info message
     """
-    if not parse_config().tracking_enabled and db.has_been_downloaded(file):
+    if not load_config().tracking_enabled and db.has_been_downloaded(file):
         message = 'Already downloaded - Skipping'
         logger.debug(message)
 
         return message
 
-    path = download_file(f'{parse_config().files_url}{file}')
+    path = download_file(f'{load_config().files_url}{file}')
     return path
 
 
