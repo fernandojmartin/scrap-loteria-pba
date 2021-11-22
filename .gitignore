@@ -1,6 +1,7 @@
 pyvenv.cfg
 __pycache__
 share
+env
 .idea
 database.db
 downloads/*
